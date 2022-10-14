@@ -1,20 +1,16 @@
 import os
 import sys
-from typing import *
+from typing import List
 
-COMMANDS = {
-    "serve": "Start the server.",
-    "test": "Run the tests"
-}
+COMMANDS = {"serve": "Start the server.", "test": "Run the tests"}
 
 
 def generate_description_of_commands() -> None:
-    """Generates the description of all the availabe commands.
-    """
+    """Generates the description of all the availabe commands."""
     print("python manage.py\t[COMMAND]")
     print(f'COMMANDS\t\tDESCRIPTION\n{"-"*8}\t\t{"-"*11}')
     for cmd, des in COMMANDS.items():
-        print(f'{cmd}\t\t\t{des}')
+        print(f"{cmd}\t\t\t{des}")
 
 
 def handle_commands(args: List[str]) -> None:
@@ -31,7 +27,7 @@ def handle_commands(args: List[str]) -> None:
     if cmd == "serve":
         os.system("uvicorn app.main:app --reload")
     elif cmd == "test":
-        os.system('pytest')
+        os.system("pytest")
     else:
         print("Nothing")
 
