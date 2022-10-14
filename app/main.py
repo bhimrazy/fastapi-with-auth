@@ -19,5 +19,5 @@ app.add_middleware(
 
 @app.get("/", tags=["home"])
 def get_home():
-    """Root Endpoint """
+    """Root Endpoint"""
     return {"message": "Hello World"}
