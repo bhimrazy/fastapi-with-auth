@@ -25,7 +25,7 @@ def handle_commands(args: List[str]) -> None:
         raise Exception("Not a valid command")
 
     if cmd == "serve":
-        os.system("uvicorn app.main:app --reload")
+        os.system("uvicorn app.main:app --host 0.0.0.0 --reload")
     elif cmd == "test":
         os.system("pytest")
     else:
