@@ -1,9 +1,11 @@
+from http import HTTPStatus
 from typing import Dict
+
+from app.db.database import database
 from fastapi import FastAPI, status
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.routers import api
-from http import HTTPStatus
 
 # Define application
 app = FastAPI(
@@ -22,6 +24,16 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+
+@app.on_event("startup")
+async def startup():
+    await database.connect()
+
+
+@app.on_event("shutdown")
+async def shutdown():
+    await database.disconnect()
 
 
 @app.get("/home", tags=["home"])
