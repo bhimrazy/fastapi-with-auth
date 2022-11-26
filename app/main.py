@@ -1,13 +1,14 @@
 from http import HTTPStatus
 from typing import Dict
 
-from fastapi import Depends, FastAPI, status
+from fastapi import FastAPI, status
 from fastapi.middleware.cors import CORSMiddleware
 
 from sqlalchemy.future import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.db import get_session
+from app.db import init_db
+
 
 from app.routers import api
 
@@ -30,9 +31,10 @@ app.add_middleware(
 )
 
 
-# @app.on_event("startup")
-# async def on_startup():
-#     await init_db()
+@app.on_event("startup")
+async def on_startup():
+    await init_db()
+
 
 @app.get("/", tags=["home"])
 def index() -> Dict:

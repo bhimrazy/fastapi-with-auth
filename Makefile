@@ -44,5 +44,5 @@ freeze:
 # Freeze packages
 .ONESHELL:
 migrate:
-	alembic revision --autogenerate -m "message"
+	alembic revision --autogenerate -m "init"
 	alembic upgrade head
