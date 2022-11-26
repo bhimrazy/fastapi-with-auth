@@ -8,6 +8,7 @@ help:
 	@echo "style   : executes style formatting."
 	@echo "clean   : cleans all unnecessary files."
 	@echo "freeze  : freeze all the installed packages"
+	@echo "migrate : migrate to db"
 
 # Styling
 .PHONY: style
@@ -38,3 +39,10 @@ clean: style
 .ONESHELL:
 freeze:
 	pip freeze > requirements.txt
+
+
+# Freeze packages
+.ONESHELL:
+migrate:
+	alembic revision --autogenerate -m "message"
+	alembic upgrade head

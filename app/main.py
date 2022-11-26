@@ -1,9 +1,13 @@
 from http import HTTPStatus
 from typing import Dict
 
-from app.db.database import database
-from fastapi import FastAPI, status
+from fastapi import Depends, FastAPI, status
 from fastapi.middleware.cors import CORSMiddleware
+
+from sqlalchemy.future import select
+from sqlalchemy.ext.asyncio import AsyncSession
+
+from app.db import get_session
 
 from app.routers import api
 
@@ -26,14 +30,9 @@ app.add_middleware(
 )
 
 
-@app.on_event("startup")
-async def startup():
-    await database.connect()
-
-
-@app.on_event("shutdown")
-async def shutdown():
-    await database.disconnect()
+# @app.on_event("startup")
+# async def on_startup():
+#     await init_db()
 
 
 @app.get("/home", tags=["home"])
