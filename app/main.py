@@ -14,7 +14,7 @@ from app.routers import api
 # Define application
 app = FastAPI(
     title="FastAPI Blog App",
-    description="Create Blogs.",
+    description="A blog app using FastAPI ",
     version="0.1",
 )
 
@@ -34,19 +34,8 @@ app.add_middleware(
 # async def on_startup():
 #     await init_db()
 
-
-@app.get("/home", tags=["home"])
-def get_home():
-    """Root Endpoint"""
-    return {"message": "Hello World"}
-
-
-@app.get("/")
-def _index() -> Dict:
-    """Health check."""
-    response = {
-        "message": HTTPStatus.OK.phrase,
-        "status-code": HTTPStatus.OK,
-        "data": {},
-    }
-    return response
+@app.get("/", tags=["home"])
+def index() -> Dict:
+    """Root Endpoint
+    """
+    return {"message": "Welcome to Blog API"}
